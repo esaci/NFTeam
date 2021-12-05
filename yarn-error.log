@@ -1,0 +1,46 @@
+Arguments: 
+  /Users/th0t_nzeng/.nvm/versions/node/v16.11.0/bin/node /Users/th0t_nzeng/.nvm/versions/node/v16.11.0/bin/yarn add @material-ui
+
+PATH: 
+  /Users/th0t_nzeng/.nvm/versions/node/v16.11.0/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Users/th0t_nzeng/.cargo/bin
+
+Yarn version: 
+  1.22.17
+
+Node version: 
+  16.11.0
+
+Platform: 
+  darwin arm64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/@material-ui: Request "https://registry.yarnpkg.com/@material-ui" returned a 405
+      at Request.params.callback [as _callback] (/Users/th0t_nzeng/.nvm/versions/node/v16.11.0/lib/node_modules/yarn/lib/cli.js:67038:18)
+      at Request.self.callback (/Users/th0t_nzeng/.nvm/versions/node/v16.11.0/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (node:events:390:28)
+      at Request.<anonymous> (/Users/th0t_nzeng/.nvm/versions/node/v16.11.0/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (node:events:390:28)
+      at IncomingMessage.<anonymous> (/Users/th0t_nzeng/.nvm/versions/node/v16.11.0/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (node:events:509:28)
+      at IncomingMessage.emit (node:events:402:35)
+      at endReadableNT (node:internal/streams/readable:1343:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+    "name": "hardhat-project",
+    "devDependencies": {
+      "@nomiclabs/hardhat-ethers": "^2.0.3",
+      "@nomiclabs/hardhat-waffle": "^2.0.1",
+      "chai": "^4.3.4",
+      "ethereum-waffle": "^3.4.0",
+      "ethers": "^5.5.2",
+      "hardhat": "^2.7.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
