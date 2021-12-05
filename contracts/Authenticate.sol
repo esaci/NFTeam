@@ -10,10 +10,10 @@ contract NFTeamAuth {
         uint256 id;
         bool isArtist;
         address wallet;
-        bytes32 userName; //Spotify userName
+        string userName; //Spotify userName
     }
 
-    mapping(bytes32 => User) users;
+    mapping(string => User) users;
     mapping(address => bool) isAuthenticated;
 
     modifier onlyAdmin() {
@@ -32,10 +32,20 @@ contract NFTeamAuth {
         NFTeam_token = _tokenAddress;
     }
 
-    function addUser(address _userWallet, bytes32 _userName, bool _isArtist) onlyAdmin external {
+    function addUser(address _userWallet, string memory _userName, bool _isArtist) onlyAdmin external {
         require(isAuthenticated[_userWallet] == false, "user already exists");
         users[_userName] = User(nextUser, _isArtist, _userWallet, _userName );
         isAuthenticated[_userWallet] = true;
         nextUser++;
     }
+
+    function newMint(address _to, string memory _metadataUri) external {
+        NFTeamCoin remoteContract = NFTeamCoin(NFTeam_token);
+
+        remoteContract.safeMint((_to), _metadataUri);
+    }
+}
+
+interface NFTeamCoin {
+    function safeMint(address to, string memory metadataUri) external;
 }
