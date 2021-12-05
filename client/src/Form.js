@@ -1,44 +1,70 @@
-import React from 'react';
+import React, { setState, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import Web3 from 'web3';
 
 const LoginForm = ({contract, web3}) => {
 
-    const handleSubmit = async () => {
-        if (window.ethereum){
-            const _web3 = new Web3(window.ethereum);
-        try{
-            // Request account access if needed
-            await window.ethereum.enable();
-            console.log("OK")
-        } catch (error){
-            console.error(error);
-        }
-        }
 
-            // console.log('Web3 >> ', await web3.eth.accounts.sign());      
-            // console.log('Web3 >> ', await web3.eth.accounts);      
-            // console.log('Web3 >> ', await web3.eth.getAccounts());      
+    const [userAddress, setUseraddress] = useState('');
+    const [spotifyId, setSpotifyId] = useState(null);
+    const [isTeamRunning, setIsTeamRunning] = useState(false)
+
+    useEffect(() => {
+
+    }, [])
+
+    const handleAddress = (e) => {
+        e.preventDefault();
+        setUseraddress(e.target.value);
+    }
+
+    const handleId = (e) => {
+        e.preventDefault();
+        setSpotifyId(e.target.value);
+    }
+
+    const handleLaunch = async () => {
+        await axios.post("http://localhost:4242/LaunchTeam", {
+            artistWallet: userAddress,
+            spotifyId: spotifyId
+        })
+        setUseraddress('');
+        setSpotifyId('');
+        setIsTeamRunning(true); 
+    }
+    const handleClose = async () => {
+        await axios.post("http://localhost:4242/closeTeam");
+        setIsTeamRunning(false);
+    }
+
+    const toogleTeam = async () => {
+        if (isTeamRunning){
+           await handleClose();
+        } else {
+            await handleLaunch()
+        }
     }
     return (
         <Grid textAlign='center' style={{ height: '50vh' }} verticalAlign='middle'>
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header as='h2' color='teal' textAlign='center'>
-                Create account
+                Artists, Launch Your Team !
             </Header>
             <Form size='large'>
                 <Segment stacked>
-                <Form.Input fluid icon='ethereum' iconPosition='left' placeholder='Wallet address' />
+                <Form.Input required onChange={handleAddress} fluid icon='ethereum' iconPosition='left' placeholder='Wallet address' />
                 <Form.Input
                     fluid
+                    required
                     icon='spotify'
                     iconPosition='left'
-                    placeholder='spotify userName'
+                    onChange={handleId}
+                    placeholder='spotify ID'
                 />
 
-                <Button onClick={handleSubmit} color='green' fluid size='large'>
-                    Join NFTeam
+                <Button onClick={toogleTeam} color='green' fluid size='large'>
+                    Launch NFTeam
                 </Button>
                 </Segment>
             </Form>

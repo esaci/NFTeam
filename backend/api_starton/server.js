@@ -107,14 +107,6 @@ const getBlockchains = async () => {
         })
     }
 
-
-    // const blockchains = erc20Templates.map(erc20Template => {
-    //     console.log(erc20Template.name, ":", erc20Template.blockchains)
-    //    return erc20Template.blockchains
-    // })
-    // console.log("Returned Blockchains ==> ", blockchains);
-
-    // templates.data.items.map(template => console.log(".....", template.tags[0].name, ": ", templates));
     return blockchains.data
 }
 
@@ -127,7 +119,6 @@ const getTemplates = async () => {
     })
     console.log("Returned Blockchains ==> ", blockchains);
 
-    // templates.data.items.map(template => console.log(".....", template.tags[0].name, ": ", templates));
     return templates.data
 }
 
@@ -138,7 +129,7 @@ const deployContract = async () => {
         "name": "NFTeamAuth",
         "description": "Authentication contract for our NFteamers",
         "params": [ // parameter values for the smart contract constructors, this will change depending of your contract
-            "0x6efd694b5FCc6dc9ce08F27605D61b1B3357307C",
+            "0x6efd694b5FCc6dc9ce08F27605D61b1B3357307C", // TokenAddress
         ],
         "abi": contractAbi,// Paste here the abi you copied to clipboard
         "bytecode": byteCode,// Paste here the bytecode you copied to clipboard
@@ -163,7 +154,20 @@ app.use((req, res, next) => {
 })
 
 app.get('/', (req, res) => {
-    console.log("Hello Peers");
+    console.log("Hello NFTeam");
+})
+
+app.post('/LaunchTeam', (req, res) => {
+  //Trigger contract launch function
+  console.log(req.body)
+
+})
+
+app.post('/LaunchTeam', (req, res) => {
+  //Trigger contract close function
+  console.log(req.body)
+
+
 })
 
 app.post('/verify-signature', (req, res, next) => {
